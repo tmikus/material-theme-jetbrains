@@ -152,19 +152,19 @@ public final class MTTreeUI extends WideSelectionTreeUI {
       final boolean selected = tree.isPathSelected(path);
       final Graphics2D rowGraphics = (Graphics2D) g.create();
       rowGraphics.setClip(clipBounds);
-
       if (selected) {
         final Color bg = getSelectionBackgroundColor(tree, true);
         rowGraphics.setColor(bg);
         rowGraphics.fillRect(xOffset, bounds.y, containerWidth, bounds.height);
-
+      }
+      super.paintRow(rowGraphics, clipBounds, insets, bounds, path, row, isExpanded, hasBeenExpanded, isLeaf);
+      if (selected) {
         if (tree.hasFocus()) {
           LIST_FOCUSED_PAINTER.paintBorder(tree, rowGraphics, xOffset, bounds.y, containerWidth, bounds.height);
         } else {
           LIST_PAINTER.paintBorder(tree, rowGraphics, xOffset, bounds.y, containerWidth, bounds.height);
         }
       }
-      super.paintRow(rowGraphics, clipBounds, insets, bounds, path, row, isExpanded, hasBeenExpanded, isLeaf);
       rowGraphics.dispose();
     } else {
       super.paintRow(g, clipBounds, insets, bounds, null, row, isExpanded, hasBeenExpanded, isLeaf);
